@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+
+/* .active{
+    border-bottom:3px solid black ;
+} */
+
+.background{
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('./assets/imgi_12_hero_2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+.background2{
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('./assets/imgi_12_hero_2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: 50% 40%;
+}
+.background3{
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('./assets/shopping.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 60% 40%;
+    background-size: cover;
+}
+
+
+.container{
+    padding: 0 200px;
+    margin: auto;
+}
+
+.btn1{
+    cursor: pointer;
+    padding: 16px 45px;
+    color: white;
+    border: 2px solid white ;
+    transition: 0.2s;
+    
+}
+.btn1:hover{
+    background-color: white;
+    color: black;
+
+}
+
+
+/* @keyframes appear {
+    from{
+        opacity: 0;
+        scale: 0.95;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.test {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+}
+
+
+@keyframes appearHorizentally {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px) scale(0.98);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-30px) scale(0.99);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+}
+
+.onScroll2{
+    animation: appearHorizentally linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+} */
+
+
