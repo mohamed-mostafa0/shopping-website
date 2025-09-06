@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import {BounceLoader} from "react-spinners";
 import { useQuery } from '@tanstack/react-query';
+import { motion } from "framer-motion";
 
 export default function () {
 
@@ -95,6 +96,7 @@ export default function () {
    
     <div className="mb-15">
       <p className="text-gray-400 font-light text-center">Popular Products</p>
+
       <h1 className="text-4xl font-extrabold text-center my-3">Our Products</h1>
       <p className="text-center text-gray-500 max-w-3xl mx-auto">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nostrum natus excepturi fuga ullam accusantium vel ut eveniet aut consequatur laboriosam ipsam.

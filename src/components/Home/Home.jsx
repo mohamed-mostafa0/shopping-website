@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar'
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 import { motion, useAnimation, useInView } from "framer-motion";
 import LandingPage from '../LandingPage/LandingPage';
+import Contactus from '../contactus/Contactus';
 
 export default function Home() {
 
@@ -43,6 +44,11 @@ export default function Home() {
 
   <div>
     <FeaturedProducts/>
+  </div>
+
+
+  <div>
+    <Contactus/>
   </div>
    
   </div>
