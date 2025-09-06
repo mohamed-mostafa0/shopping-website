@@ -210,11 +210,12 @@ import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaLock } from "react-icons/fa";
 
-import Register from "../register/register";
+import Register from "../SignUpForm/register";
 import { authContext } from "../../context/AuthContext";
+import SignInForm from "../SingInForm/SignInForm";
 
 
-export default function SlidingAuth() {
+export default function signinAndSignupForm() {
   
   const{isSignUp , setIsSignUp } =useContext(authContext)
 
@@ -231,37 +232,8 @@ export default function SlidingAuth() {
           className="w-[200%] h-full flex"
         >
           {/* --- Sign In Form --- */}
-          <div className="w-1/2 flex flex-col items-center justify-center p-8">
-            <h1 className="text-3xl font-bold mb-6">Sign In</h1>
-
-            {/* Username */}
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <FaUser className="text-gray-400 mr-3" />
-              <input
-                type="text"
-                placeholder="Username"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-6">
-              <FaLock className="text-gray-400 mr-3" />
-              <input
-                type="password"
-                placeholder="Password"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-
-            <button
-             className="w-40 h-12 rounded-full bg-black text-white font-semibold hover:bg-gray-800 duration-200"
-    
-            >
-              Login
-
-            </button>
-          </div>
+        
+          <SignInForm/>
 
           {/* --- Sign Up Form --- */}
           <Register isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>

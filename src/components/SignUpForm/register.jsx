@@ -11,7 +11,7 @@ import { TbXboxX } from "react-icons/tb";
 
 
 
-export default function Register({isSignUp , setIsSignUp}) {
+export default function SignUpForm({isSignUp , setIsSignUp}) {
 
     const navigate = useNavigate()
 
@@ -29,7 +29,7 @@ export default function Register({isSignUp , setIsSignUp}) {
                 
 
                 setTimeout(() => {
-                    navigate('/login')
+                    // navigate('/signin')
                 },1000)
 
                 

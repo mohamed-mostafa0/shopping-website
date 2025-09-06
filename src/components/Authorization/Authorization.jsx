@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '../Login/Login'
+import Login from '../signinAndSignupForm/signInAndSignupForm'
 import { Navigate } from 'react-router-dom'
 
 export default function Authorization({children}) {
