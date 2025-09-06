@@ -7,6 +7,7 @@ export default function AuthContext({children}) {
 
     
     const [userToken, setuserToken] = useState(null)
+    const [isSignUp, setIsSignUp] = useState(false);
 
     useEffect(()=>{
       if(localStorage.getItem('token') != null)
@@ -16,7 +17,9 @@ export default function AuthContext({children}) {
   return (
     <authContext.Provider value={{
         userToken,
-        setuserToken
+        setuserToken,
+        isSignUp,
+        setIsSignUp
     }}>
         {children}
     </authContext.Provider>

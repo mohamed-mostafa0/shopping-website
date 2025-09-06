@@ -3,40 +3,16 @@ import GetAllProducts from '../OurProducts/OurProducts'
 import Navbar from '../Navbar/Navbar'
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 import { motion, useAnimation, useInView } from "framer-motion";
+import LandingPage from '../LandingPage/LandingPage';
 
 export default function Home() {
 
   return <>
 
     <div className="site-wrap">
-  <div className="landing-page">
-    <div className="h-screen background overflow-hidden">
-      <Navbar />
-      <motion.div initial={{opacity:0,  paddingTop:100 }} animate={{opacity:1 , paddingTop:0}} transition={{duration:1}}>
-      
-      <div className="lg:container p-20 m-auto h-screen flex items-center ">
-        <div className="grid grid-cols-12 justify-center w-full">
-          <div className="col-span-12 lg:col-span-5 text-center lg:text-left mx-auto">
-          
-            <h1 className="text-white text-7xl font-extrabold">Shop With Us</h1>
-            <p className="text-white my-7">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-              assumenda ea quo cupiditate facere deleniti fuga officia.
-            </p>
-            <div>
-              <button className="btn1 font-bold md:mb-2 mr-2 mb-2">Shop Now</button>
-              <button className="bg-white text-black border-white border-2 hover:bg-transparent py-4 px-10 font-bold hover:text-white duration-100 cursor-pointer">
-                Club Membership
-              </button>
-            </div>
-          </div>
-        </div>
+      <div className='landing-page'>
+        <LandingPage/>
       </div>
-      </motion.div>
-     
-    </div>
-  </div>
-</div>
 
 
 
@@ -69,5 +45,6 @@ export default function Home() {
     <FeaturedProducts/>
   </div>
    
+  </div>
   </>
 }

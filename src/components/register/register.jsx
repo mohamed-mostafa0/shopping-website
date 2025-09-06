@@ -3,11 +3,15 @@ import {useFormik} from 'formik'
 import * as yup from 'yup'
 import  axios  from "axios";
 import { useNavigate } from 'react-router-dom';
+import { MdEmail } from "react-icons/md";
+import { FaLock, FaPhoneAlt, FaUser } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { TbXboxX } from "react-icons/tb";
 
 
 
-axios
-export default function Register() {
+
+export default function Register({isSignUp , setIsSignUp}) {
 
     const navigate = useNavigate()
 
@@ -20,6 +24,9 @@ export default function Register() {
             function(x){
                 setsubmitted(true)
                 seterrMsg(false)
+                setIsSignUp(false)
+                console.log(isSignUp);
+                
 
                 setTimeout(() => {
                     navigate('/login')
@@ -30,14 +37,9 @@ export default function Register() {
         ).catch(
             function(x){
                 setsubmitted(false)
-                seterrMsg(x.response.data.message)
-                
-                
+                seterrMsg(x.response.data.message)             
             }
         )
-        
-        
-        
     }
 
 const registerationFormik =  useFormik({
@@ -55,81 +57,132 @@ const registerationFormik =  useFormik({
         email:yup.string().email('please enter a valid email'),
         password:yup.string().min(6,"passowrd must be at least 6 characters"),
         phone:yup.string().matches(/^01[0125][0-9]{8}$/ , 'please write an egyption phone number'),
-        rePassword:yup.string().oneOf([yup.ref('password'),'Confirm your password'])
+        rePassword:yup.string().oneOf([yup.ref('password')] , 'Confirm password must match password')
 
 
     })
-    
 })
 
-
-
-
-
-
-
-
-    
   return <>
   
-  
-  <div className='flex justify-content-center items-center min-h-200'>
-    
-<form className="max-w-md mx-auto p-10 bg- rounded-3xl w-100" onSubmit={registerationFormik.handleSubmit}>
 
-    <h1 className='mb-10 font-semibold text-4xl '>Sign Up</h1>
+   <div className="w-1/2 flex flex-col items-center justify-center p-8">
+            <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
 
-    {submitted? <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-  <span class="font-medium">Account Created Successfully</span> 
-</div>: ''}
+        <form  onSubmit={registerationFormik.handleSubmit}>
 
-{errMsg? <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-  <span class="font-medium">{errMsg}</span> 
-</div>
-: ''}
+        {submitted? <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 text-center" role="alert">
+       <span class="font-medium ">Account Created Successfully</span> 
+        </div>: ''}
 
-    
-  <div className="relative z-0 w-full mb-5 group">
-    <input type="text" value={registerationFormik.values.name} onChange={registerationFormik.handleChange} onBlur={registerationFormik.handleBlur} name="name" id="name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-    <label htmlFor="name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
-    {registerationFormik.errors.name  && registerationFormik.touched.name? <div className="mt-2 p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-    <span className="font-medium">{registerationFormik.errors.name}</span>
-    </div> : ''}
-  </div>
-  <div className="relative z-0 w-full mb-5 group">
-    <input type="email" value={registerationFormik.values.email} onChange={registerationFormik.handleChange} onBlur={registerationFormik.handleBlur} name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-    <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email </label>
-    {registerationFormik.errors.email && registerationFormik.touched.email ? <div className="mt-2 p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-    <span className="font-medium">{registerationFormik.errors.email}</span>
-    </div> :''}
-  </div>
-  <div className="relative z-0 w-full mb-5 group">
-    <input type="tel" value={registerationFormik.values.phone}  onChange={registerationFormik.handleChange} onBlur={registerationFormik.handleBlur}  name="phone" id="phone" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-    <label htmlFor="phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone </label>
-    {registerationFormik.errors.phone && registerationFormik.touched.phone ? <div className="mt-2 p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-    <span className="font-medium">{registerationFormik.errors.phone}</span>
-    </div> : ''}
-  </div>
-  <div className="relative z-0 w-full mb-5 group">
-    <input type="password" value={registerationFormik.values.password}  onChange={registerationFormik.handleChange} onBlur={registerationFormik.handleBlur}  name="password" id="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer " placeholder=" " required />
-    <label htmlFor="phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-    {registerationFormik.errors.password && registerationFormik.touched.password ? <div className="mt-2 p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-    <span className="font-medium">{registerationFormik.errors.password}</span>
-    </div> : ''}
-  </div>
-  <div className="relative z-0 w-full mb-5 group">
-    <input type="password" value={registerationFormik.values.rePassword} onChange={registerationFormik.handleChange} onBlur={registerationFormik.handleBlur} name="rePassword" id="rePassword" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-    <label htmlFor="confirmPassword" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
-    {registerationFormik.errors.rePassword && registerationFormik.touched.rePassword ? <div className="mt-2 p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-    <span className="font-medium">{registerationFormik.errors.rePassword}</span>
-    </div> : ''}
-  </div>
-  
-  
-  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-</form>
+        {errMsg? <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 text-center" role="alert">
+          <span class="font-medium ">{errMsg}</span> 
+        </div>
+        : ''}
+        <div className={`flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4 ${registerationFormik.errors.name && registerationFormik.touched.name ? "border-red-600 border-1":"border-gray-200 border-1" }`} >
+              <FaUser className="text-gray-400 mr-3" />
+              <input
+                name="name"
+                id="name"
+                type="text"
+                placeholder="Name"
+                className={`bg-transparent outline-none w-full font-medium ${registerationFormik.errors.name  && registerationFormik.touched.name? "text-red-600":"text-gray-900" }`}
+                value={registerationFormik.values.name}
+                onChange={registerationFormik.handleChange} 
+                onBlur={registerationFormik.handleBlur}
+              />
+              <TbXboxX  className={`text-2xl ${registerationFormik.errors.name && registerationFormik.touched.name ? "text-red-600 visible":"hidden " }`} />
 
-  </div>
+            </div>
+            {registerationFormik.errors.name  && registerationFormik.touched.name? <div className=" mb-4 text-sm text-red-600  dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span className="font-medium">{registerationFormik.errors.name}</span>
+             </div> : ''}
+
+           
+            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
+              <MdEmail className="text-gray-400 mr-3" />
+              <input
+                 name="email"
+                id="email"
+                type="email"
+                placeholder="Email"
+                className={`bg-transparent outline-none w-full font-medium ${registerationFormik.errors.email  && registerationFormik.touched.email? "text-red-600":"text-gray-900" }`}
+                value={registerationFormik.values.email}
+                onChange={registerationFormik.handleChange} 
+                onBlur={registerationFormik.handleBlur}
+              />
+              <TbXboxX  className={`text-2xl ${registerationFormik.errors.email && registerationFormik.touched.email ? "text-red-600 visible":"hidden " }`} />
+            </div>
+            {registerationFormik.errors.email  && registerationFormik.touched.email? <div className=" mb-4 text-sm text-red-600  dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span className="font-medium">{registerationFormik.errors.email}</span>
+             </div> : ''}
+           
+            
+            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
+              <FaLock className="text-gray-400 mr-3" />
+              <input
+                name="password"
+                id="password"
+                type="password"
+                placeholder="Password"
+                className={`bg-transparent outline-none w-full font-medium ${registerationFormik.errors.password  && registerationFormik.touched.password? "text-red-600":"text-gray-900" }`}
+                value={registerationFormik.values.password}
+                onChange={registerationFormik.handleChange} 
+                onBlur={registerationFormik.handleBlur}
+              />
+              <TbXboxX  className={`text-2xl ${registerationFormik.errors.password && registerationFormik.touched.password ? "text-red-600 visible":"hidden " }`} />
+            </div>
+            {registerationFormik.errors.password  && registerationFormik.touched.password? <div className=" mb-4 text-sm text-red-600  dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span className="font-medium">{registerationFormik.errors.password}</span>
+             </div> : ''}
+           
+            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
+              <FaLock className="text-gray-400 mr-3" />
+              <input
+                name="rePassword"
+                id="rePassword"
+                type="password"
+                placeholder="Confirm Password"
+                className={`bg-transparent outline-none w-full font-medium ${registerationFormik.errors.rePassword  && registerationFormik.touched.rePassword? "text-red-600":"text-gray-900" }`}
+                value={registerationFormik.values.rePassword}
+                onChange={registerationFormik.handleChange} 
+                onBlur={registerationFormik.handleBlur}
+              />
+              <TbXboxX  className={`text-2xl ${registerationFormik.errors.rePassword && registerationFormik.touched.rePassword ? "text-red-600 visible":"hidden " }`} />
+            </div>
+            {registerationFormik.errors.rePassword  && registerationFormik.touched.rePassword? <div className=" mb-4 text-sm text-red-600  dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span className="font-medium">{registerationFormik.errors.rePassword}</span>
+             </div> : ''}
+            
+            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
+              <FaPhoneAlt  className="text-gray-400 mr-3" />
+              <input
+                name="phone"
+                id="phone"
+                type="tel"
+                placeholder="Phone"
+                className={`bg-transparent outline-none w-full font-medium ${registerationFormik.errors.phone  && registerationFormik.touched.phone? "text-red-600":"text-gray-900" }`}
+                value={registerationFormik.values.phone}
+                onChange={registerationFormik.handleChange} 
+                onBlur={registerationFormik.handleBlur}
+              />
+              <TbXboxX  className={`text-2xl ${registerationFormik.errors.phone && registerationFormik.touched.phone ? "text-red-600 visible":"hidden " }`} />
+            </div>
+            {registerationFormik.errors.phone  && registerationFormik.touched.phone? <div className=" mb-4 text-sm text-red-600  dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span className="font-medium">{registerationFormik.errors.phone}</span>
+             </div> : ''}
+          <div className='w-full text-center'>
+          <button className="w-40 h-12 rounded-full bg-black text-white font-semibold hover:bg-gray-800 duration-200 text-center"
+              
+              >
+                Sign Up
+              </button>
+          </div>
+           
+        </form>
+           
+           
+          </div>
     
 
     </>

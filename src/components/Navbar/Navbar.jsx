@@ -6,7 +6,7 @@ import { authContext } from '../../context/AuthContext';
 
 export default function Navbar() {
 
-    const {userToken ,setuserToken}= useContext(authContext)
+    const {userToken ,setuserToken ,setIsSignUp}= useContext(authContext)
     const navigate = useNavigate()
 
     function logout (){
@@ -25,8 +25,8 @@ export default function Navbar() {
     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <div className=''>
        {userToken? <NavLink to="/Login"> <button type="button" className="cursor-pointer text-white bg-black border-2 border-black hover:bg-white hover:text-black duration-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={logout}>Logout</button></NavLink> : <>
-        <NavLink to="/Login"> <button type="button" className="cursor-pointer text-white bg-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-3">Login</button></NavLink>             
-        <NavLink to="/register"> <button type="button" className="cursor-pointer text-white bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign up</button></NavLink>
+        <NavLink to="/signin"> <button type="button" className="cursor-pointer text-white bg-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-3" onClick={() => setIsSignUp(false)}>Login</button></NavLink>             
+        <NavLink to="/signup"> <button type="button" className="cursor-pointer text-white bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={()=> setIsSignUp(true)}>Sign up</button></NavLink>
        </>}
 
       

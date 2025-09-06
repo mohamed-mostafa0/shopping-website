@@ -206,27 +206,29 @@
 
 
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaLock } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { FaPhoneAlt } from "react-icons/fa";
+
+import Register from "../register/register";
+import { authContext } from "../../context/AuthContext";
 
 
 export default function SlidingAuth() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  
+  const{isSignUp , setIsSignUp } =useContext(authContext)
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       
       {/* Wrapper */}
-      <div className="relative w-[900px] h-[500px] shadow-xl rounded-2xl overflow-hidden">
+      <div className="relative w-[900px] h-fit min-h-[500px]  shadow-xl rounded-2xl overflow-hidden">
         
         {/* Sliding Panel */}
         <motion.div
           animate={{ x: isSignUp ? "-63%" : "12%" }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-[200%] h-full flex"
+          className="w-[200%] h-full flex"
         >
           {/* --- Sign In Form --- */}
           <div className="w-1/2 flex flex-col items-center justify-center p-8">
@@ -252,69 +254,20 @@ export default function SlidingAuth() {
               />
             </div>
 
-            <button className="w-40 h-12 rounded-full bg-black text-white font-semibold hover:bg-gray-800 duration-200">
+            <button
+             className="w-40 h-12 rounded-full bg-black text-white font-semibold hover:bg-gray-800 duration-200"
+    
+            >
               Login
+
             </button>
           </div>
 
           {/* --- Sign Up Form --- */}
-          <div className="w-1/2 flex flex-col items-center justify-center p-8">
-            <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
-
-            {/* Name */}
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <FaUser className="text-gray-400 mr-3" />
-              <input
-                type="text"
-                placeholder="Name"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <MdEmail className="text-gray-400 mr-3" />
-              <input
-                type="email"
-                placeholder="Email"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <FaLock className="text-gray-400 mr-3" />
-              <input
-                type="password"
-                placeholder="Password"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <FaLock className="text-gray-400 mr-3" />
-              <input
-                type="password"
-                placeholder="Confirm password"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-            <div className="flex items-center w-80 bg-gray-200 rounded-full px-4 py-3 mb-4">
-              <FaPhoneAlt  className="text-gray-400 mr-3" />
-              <input
-                type="phone"
-                placeholder="Phone"
-                className="bg-transparent outline-none w-full font-medium"
-              />
-            </div>
-
-            {/* Password */}
-            
-
-            <button className="w-40 h-12 rounded-full bg-black text-white font-semibold hover:bg-gray-800 duration-200">
-              Sign Up
-            </button>
-          </div>
+          <Register isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>
         </motion.div>
 
-        {/* Overlay Panel with Switch Buttons */}
+       
         <motion.div
           animate={{ x: isSignUp ? "100%" : "0%" }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
