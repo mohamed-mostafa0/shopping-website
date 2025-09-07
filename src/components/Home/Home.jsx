@@ -12,11 +12,11 @@ export default function Home() {
   return <>
 
     <div className="site-wraper">
-      <div className='landing-page'>
+      <div id='landingPage' className='landing-page'>
         <LandingPage/>
       </div>
 
-    <div className='our-products mb-10'>
+    <div id="ourProducts" className='our-products mb-10'>
         <GetAllProducts/>
 
     </div>
@@ -26,12 +26,12 @@ export default function Home() {
         <GetNotified/>
       </div>
 
-      <div className='featured-products '>
+      <div id="featuredProducts" className='featured-products '>
         <FeaturedProducts/>
       </div>
 
 
-      <div className='contact-us '>
+      <div  id="contactUs" className='contact-us '>
         <Contactus/>
       </div>
    

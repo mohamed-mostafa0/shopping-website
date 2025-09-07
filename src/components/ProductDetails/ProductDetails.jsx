@@ -88,7 +88,7 @@ export default function ProductDetails() {
   
 
   {productDetails? 
-  <div className='lg:px-70 md:px-20 px-10 mx-auto '>
+  <div className='lg:px-70 md:px-20 p-10 mx-auto '>
   <div className='md:grid md:grid-cols-12 flex flex-col pt-20'>
       <div className='md:col-span-4  '>
         

@@ -4,6 +4,9 @@
 /* .active{
     border-bottom:3px solid black ;
 } */
+html {
+    scroll-behavior: smooth;
+  }
 
 .background{
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('./assets/imgi_12_hero_2.jpg');

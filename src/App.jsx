@@ -8,6 +8,7 @@ import AuthContext from './context/AuthContext'
 import {QueryClientProvider , QueryClient} from '@tanstack/react-query'
 import GetAllProducts from './components/getAllProducts/getAllProducts'
 import NotFound from "./components/NotFound/NotFound";
+import OurProducts from './components/OurProducts/OurProducts';
 
 
 
