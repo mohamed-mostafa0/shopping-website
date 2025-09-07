@@ -25,8 +25,8 @@ export default function FeaturedProducts() {
  
   return <>
     
-    <div className='bg-gray-50'>
-    <div className='container'>
+    <div className='bg-gray-50 pb-10'>
+    <div className='container '>
         <div className='py-20'>
                 <div className='text-center mb-15'>
                     <div className='col-span-2'>   
@@ -93,19 +93,23 @@ export default function FeaturedProducts() {
                 </> :<div className="h-screen flex justify-center items-center w-full">
             <BounceLoader color="#070708" />
           </div> }
+
+    
                     
 
 
-                <div>
-                    <div>   
+              <div>
+              <div>   
 
-                    </div>
+              </div>
                     
                 </div>
         </div>
+          <div className='w-[600px] h-[0.7px] bg-gray-500 rounded-full m-auto '></div>
     </div>  
     </div>
-    
+
+   
   
   
   </>

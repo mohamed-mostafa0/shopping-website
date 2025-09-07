@@ -6,10 +6,18 @@ import { Outlet } from 'react-router-dom'
 export default function Layout() {
   return <>
   
-    <Navbar/>
-    <Outlet />
-    
-  <Footer/>
+  <div className="min-h-[1300px] flex flex-col">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Main Content */}
+      <main className="flex-grow">
+        <Outlet /> {/* or your Routes go here */}
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   
   
   </>
