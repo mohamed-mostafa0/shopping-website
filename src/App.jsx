@@ -9,6 +9,9 @@ import {QueryClientProvider , QueryClient} from '@tanstack/react-query'
 import GetAllProducts from './components/getAllProducts/getAllProducts'
 import NotFound from "./components/NotFound/NotFound";
 import OurProducts from './components/OurProducts/OurProducts';
+import CartContext from './context/CartContext';
+import Cart from './components/Cart/Cart';
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -20,6 +23,7 @@ const router = createBrowserRouter([
     {path:"/signin", element:<Login/>},
     {path:"/productDetails/:id",element:<ProductDetails/> },
     {path:"/allProducts",element:<GetAllProducts/>},
+    {path:'/cart', element:<Cart/>},
     {path:"*",element:<NotFound/>}
   ]}
 ])
@@ -35,7 +39,13 @@ export default function App() {
 
   <AuthContext>
 
+  <CartContext>
+
   <RouterProvider router={router}/>
+
+  <Toaster/>
+
+  </CartContext>
   
   </AuthContext>
   

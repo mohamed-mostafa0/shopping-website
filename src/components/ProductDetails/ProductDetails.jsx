@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -10,14 +10,18 @@ import { GoPackage } from "react-icons/go";
 import { FaTruckFast } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosStar } from "react-icons/io";
+import { cartContext } from '../../context/CartContext';
+import toast from "react-hot-toast";
 
 
 
 export default function ProductDetails() {
+
+  const {addProductToCart , updateCount} = useContext(cartContext)
   const [productDetails, setproductDetails] = useState(null)
   const [activeTab, setactiveTab] = useState("S")
   const [active, setactive] = useState(false)
-  const [counter, setCounter] = useState(5)
+  const [counter, setCounter] = useState(1)
 
   const {id} = useParams()
 
@@ -53,9 +57,11 @@ export default function ProductDetails() {
 
      async function getProductDetails(){
         axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`).then((res)=>{
-            console.log(res.data.data);
+             
             setproductDetails(res.data.data)
             
+
+
         }).catch((error)=>{
           console.log(error);
           
@@ -71,6 +77,7 @@ export default function ProductDetails() {
   const increaseCounter = () => {
     if (counter < 50) {
       setCounter(counter+1);
+    
     }
   };
 
@@ -78,9 +85,22 @@ export default function ProductDetails() {
     if (counter > 1) {
       setCounter(counter-1);
     }
-    console.log(counter);
+  }
+
+
+ 
     
-  };
+    
+  
+
+  async function handleAddToCart(){
+    const res =  await addProductToCart(id)
+
+    res? toast.success('Added To Cart',{duration:3000,position:'top-right'}) : toast.error('Failed To Add',{duration:3000,position:'top-right'})
+    
+
+    
+  }
 
   return <>
   
@@ -134,14 +154,16 @@ export default function ProductDetails() {
                         <form class="flex items-center flex-col mb-6 "> 
                             <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose quantity:</label>
                             <div class="relative flex items-center max-w-[8rem]">
-                                <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none " onClick={decreaseCounter}>
+                                <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none "
+                                 onClick={()=> {decreaseCounter()}}>
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                     </svg>
                                 </button>
                                 <input type="text" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="50" aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " disabled placeholder="999" value={counter} required  />
                                 
-                                <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none" onClick={increaseCounter}>
+                                <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                                 onClick={()=> {increaseCounter()}}>
                                     <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                     </svg>
@@ -151,7 +173,7 @@ export default function ProductDetails() {
                         </form>
 
                     </div>
-                    <a className='bg-black text-white w-full py-4 rounded-full col-span-7 cursor-pointer hover:bg-gray-200 hover:text-black duration-200'>Add To Cart</a>
+                    <a className='bg-black text-white w-full py-4 rounded-full col-span-7 cursor-pointer hover:bg-gray-200 hover:text-black duration-200' onClick={handleAddToCart}>Add To Cart</a>
                     <button className='col-span-2 '  onClick={heartActive}><FaHeart className={` text-2xl ml-5 cursor-pointer hover:text-red-600 duration-200 ${active? 'text-red-600':'text-gray-200 '}`}  /></button>
                     
                   </div>

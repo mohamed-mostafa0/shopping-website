@@ -1,12 +1,15 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useContext } from 'react'
 import photo from '../../assets/imgi_12_hero_2.jpg'
 import { Link, NavLink } from 'react-router-dom'
 import { BounceLoader } from 'react-spinners'
 import { useQuery } from '@tanstack/react-query'
+import { cartContext } from '../../context/CartContext'
+import toast from 'react-hot-toast'
 
 export default function FeaturedProducts() {
 
+  const {addProductToCart} = useContext(cartContext)
 
 
     const getFeaturedProducts = () => {
@@ -19,6 +22,12 @@ export default function FeaturedProducts() {
       gcTime: 1000 * 60 * 10
     })
     const products = res.data?.data.data
+
+    async function handleAddToCart(id){
+      const res =await addProductToCart(id)
+      res? toast.success('Added To Cart',{duration:3000,position:'top-right'}) : toast.error('Failed To Add',{duration:3000,position:'top-right'})
+      
+    }
 
     
 
@@ -50,7 +59,7 @@ export default function FeaturedProducts() {
                             <span className='font-bold text-2xl '>Price:</span>
                             <p className='mt-3 text-2xl text-gray-500 mb-5 font-semibold'>{products[26].price} EGP</p>
                             <NavLink>
-                    <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-400">
+                    <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-400" onClick = {()=> handleAddToCart(products[26]._id)}>
                       ADD TO CART
                     </button>
                   </NavLink>
@@ -73,11 +82,11 @@ export default function FeaturedProducts() {
                             <p className='mt-3 mb-4 text-gray-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, nesciunt.</p>
                             <span className='font-bold text-2xl '>Price:</span>
                             <p className='mt-3 text-2xl font-semibold text-gray-500 mb-5'>{products[25].price} EGP</p>
-                            <NavLink>
-                    <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-400">
+                    <Link>
+                    <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-400" onClick={()=> handleAddToCart(products[26]._id)}>
                       ADD TO CART
                     </button>
-                  </NavLink>
+                  </Link>
                   <Link to={`/productDetails/${products[25]._id}`}>
                     <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-white text-black hover:bg-black hover:text-white border-2 border-black duration-300">
                       VIEW DETAILS

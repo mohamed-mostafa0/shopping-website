@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { FaStar } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
@@ -6,8 +6,12 @@ import { Link, NavLink } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
 import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from "framer-motion";
+import { cartContext } from '../../context/CartContext';
+import toast from 'react-hot-toast'
 
 export default function GetAllProducts() {
+
+  const {addProductToCart} = useContext(cartContext)
 
   const tabs  = [
     {category:'All'},
@@ -45,6 +49,11 @@ export default function GetAllProducts() {
       if(activeTab === 'All') return true;
       return product.category.name === activeTab;
     });
+
+    async function handleAddToCart(id){
+      const res = await addProductToCart(id)
+      res? toast.success('Added To Cart' , {duration:3000 , position:'top-right'}) : toast.error('Failed To Add' , {duration:3000 , position:'top-right'})
+    }
     
   return (
     <div className="md:container mx-auto">
@@ -100,7 +109,7 @@ export default function GetAllProducts() {
                       </p>
                       <div className="buttons">
                         <NavLink>
-                          <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-300">
+                          <button className="cursor-pointer px-4 text-sm py-1 font-bold bg-black text-white hover:bg-white hover:text-black border-2 border-black mr-3 duration-300" onClick={()=>handleAddToCart(product._id)}>
                             ADD TO CART
                           </button>
                         </NavLink>

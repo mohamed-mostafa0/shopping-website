@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { authContext } from '../../context/AuthContext';
 import { motion } from "framer-motion";
+import { FaCartShopping } from "react-icons/fa6";
 
 export default function Navbar() {
    const navItems = [
@@ -110,8 +111,12 @@ export default function Navbar() {
 
           {/* Right buttons */}
           <div>
-            {userToken ? (
-              <NavLink to={"/signin"}>
+            {userToken ? <>
+            <div className='flex items-center space-x-4'>
+            <NavLink to={'/cart'}>
+                <FaCartShopping  className='text-2xl'/>
+            </NavLink>
+            <NavLink to={"/signin"}>
                 <button
                   type="button"
                   className="cursor-pointer text-white bg-black border-2 border-black px-4 py-2 rounded-lg"
@@ -120,7 +125,11 @@ export default function Navbar() {
                   Logout
                 </button>
               </NavLink>
-            ) : (
+              
+            </div>
+              
+              </>
+             : (
               <>
                 <NavLink to="/signin">
                   <button
