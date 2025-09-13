@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 
 export default function ProductDetails() {
 
-  const {addProductToCart , updateCount} = useContext(cartContext)
+  const {addProductToCart } = useContext(cartContext)
   const [productDetails, setproductDetails] = useState(null)
   const [activeTab, setactiveTab] = useState("S")
   const [active, setactive] = useState(false)
@@ -87,18 +87,11 @@ export default function ProductDetails() {
     }
   }
 
-
- 
-    
-    
-  
-
   async function handleAddToCart(){
     const res =  await addProductToCart(id)
 
     res? toast.success('Added To Cart',{duration:3000,position:'top-right'}) : toast.error('Failed To Add',{duration:3000,position:'top-right'})
     
-
     
   }
 
@@ -135,8 +128,6 @@ export default function ProductDetails() {
 
           
           
-          
-         
                 <div className='mb-10'>
                   <h3 className='text-sm text-gray-800 font-semibold my-10'>Select size</h3>
                   <ul className="hidden text-sm font-medium text-center rounded-lg sm:flex dark:divide-gray-700 dark:text-gray-400">

@@ -37,21 +37,6 @@ export default function CartContext({children}) {
 
      }
 
-    // function addProductToCart(id){
-    //     axios.post('https://ecommerce.routemisr.com/api/v1/cart',
-    //         {productId:id},
-
-    //         {
-    //             headers:{token:localStorage.getItem('token')}
-    //         }
-    //     ).then((res)=>{
-    //         console.log(res);
-            
-    //     }).catch((err)=>{
-    //         console.log(err);
-            
-    //     })
-    // }
 
      function getUserCart(){
         axios.get('https://ecommerce.routemisr.com/api/v1/cart',
@@ -84,7 +69,7 @@ export default function CartContext({children}) {
             setNumOfCartItems(res.data.numOfCartItems)
             setcartProducts(res.data.data.products)
             setTotalCartPrice(res.data.data.totalCartPrice)
-            // console.log(res.data.data.products);
+           
             
         }).catch((err)=>{
             console.log(err);
